@@ -1,0 +1,63 @@
+<div>
+    <div class="text-center table-responsive table-border" >
+        <h3 class="title">Exchange Products</h3>
+
+        <div *ngIf="!viewDetails">
+        <table class="table text-center" mat-table [dataSource]="dataSource">
+            <thead>
+                <tr>
+                    <th style="text-align: center">Brand</th>
+                    <th style="text-align: center">Name</th>
+                    <th style="text-align: center">Discount</th>
+                    
+                    <th style="text-align: center">Price</th>
+                    <th style="text-align: center">Details</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let exchange of exchangeProductList">
+                    <td>{{exchange.product.brand}}</td>
+                    <td>{{exchange.product.name}}</td>
+                    <td>{{exchange.offerDiscount}}</td>
+                   
+                    <td>{{exchange.product.price}}</td>
+                    <td><button class="btn btn-primary" [routerLink]=""  (click)="setSelectedProduct(exchange)">Details</button></td>
+                    
+                </tr>
+            </tbody>
+        </table>
+
+        
+        <!-- <div class="row">  
+            <div class="col-lg-8 col-md-10 ml-auto mr-auto">  
+                <span><strong>Current Active Page = </strong> {{activePage}}</span>  
+            </div>  
+    </div>  
+    <div class="row">  
+        <div class="col-lg-8 col-md-10 ml-auto mr-auto">  
+             <div class="float-right"> <app-pagination [totalRecords]="23" [recordsPerPage]="5" (onPageChange)="displayActivePage($event)"></app-pagination> </div>     
+        </div>  
+    </div>  -->
+       </div>
+        <div *ngIf="(errorMessage!='' || successMessage!='')">
+            <div class="error-message text-center font-weight-bold">{{errorMessage}}</div>
+            <div class="success-message text-center font-weight-bold">{{successMessage}}</div>
+        </div>
+    </div>
+    
+<div class="text-center" *ngIf="displayProducts && productList.length ==0">
+    <h5 class="error-message">No products available</h5>
+</div>
+<br>
+<div *ngIf="viewDetails">
+    <div class="row">
+      <div class="col-md-2">
+        <a [routerLink]="" (click)="viewDetails=false" class="btn btn-dark">
+          Back
+        </a>
+      </div>
+    </div>
+    <br>
+    <exchange-product-details [selectedProduct]="selectedProduct"></exchange-product-details>
+  </div>
+</div>
